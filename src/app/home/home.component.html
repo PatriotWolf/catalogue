@@ -6,14 +6,24 @@
 </div>
 <br>
 <!-- Container (About Section) -->
-<button (click)="getData()">click me</button>
-{{post|json}}
+
 <div id="about" class="container-fluid">
-	<div class="cssload-thecube">
+	<div class="cssload-thecube" *ngIf="!cards; else tot">
 		<div class="cssload-cube cssload-c1"></div>
 		<div class="cssload-cube cssload-c2"></div>
 		<div class="cssload-cube cssload-c4"></div>
 		<div class="cssload-cube cssload-c3"></div>
 	</div>
-  
+  	<ng-template #tot>
+  		
+  		<ngb-carousel>
+		  <ng-template ngbSlide *ngFor="let card of cards">
+		    <img [src]="card.image_link" alt="Random first slide" style="width: 100%;height:40vh">
+		    <div class="carousel-caption">
+		      <h3 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">{{card.name}}</h3>
+		      <p style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">{{card.description}}</p>
+		    </div>
+		  </ng-template>
+		</ngb-carousel>
+  	</ng-template>
 </div>
