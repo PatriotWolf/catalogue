@@ -6,29 +6,14 @@
 </div>
 <br>
 <!-- Container (About Section) -->
+<button (click)="getData()">click me</button>
+{{post|json}}
 <div id="about" class="container-fluid">
-  	<ngb-carousel *ngIf="images">
-	  <ng-template ngbSlide>
-	    <img [src]="images[0]" alt="Random first slide" style="width: 100%;height:40vh">
-	    <div class="carousel-caption">
-	      <h3>First slide label</h3>
-	      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-	    </div>
-	  </ng-template>
-	  <ng-template ngbSlide>
-	    <img [src]="images[1]" alt="Random second slide" style="width: 100%">
-	    <div class="carousel-caption">
-	      <h3>Second slide label</h3>
-	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-	    </div>
-	  </ng-template>
-	  <ng-template ngbSlide>
-	    <img [src]="images[2]" alt="Random third slide" style="width: 100%">
-	    <div class="carousel-caption">
-	      <h3>Third slide label</h3>
-	      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-	    </div>
-	  </ng-template>
-	</ngb-carousel>
+	<div class="cssload-thecube">
+		<div class="cssload-cube cssload-c1"></div>
+		<div class="cssload-cube cssload-c2"></div>
+		<div class="cssload-cube cssload-c4"></div>
+		<div class="cssload-cube cssload-c3"></div>
+	</div>
   
 </div>
