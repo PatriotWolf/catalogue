@@ -1,6 +1,6 @@
 import { Component, OnInit,Pipe,PipeTransform } from '@angular/core';
 import {GetlistService} from '../services/getlist.service';
-
+import {NgbModule,NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Pipe({ name: 'filter' })
 export class FilterPipe implements PipeTransform {
   public transform(values: any[], filter: string): any[] {
@@ -18,7 +18,8 @@ export class FilterPipe implements PipeTransform {
 export class CatalogueComponent implements OnInit {
 	cards:any=[];
 	isValid=false;
-  constructor(private listData:GetlistService) {
+	selectedData:any;
+  constructor(private listData:GetlistService,private modalService: NgbModal) {
   	this.listData.getData().subscribe(data =>{
   		console.log(data)
   		this.isValid=true;
@@ -30,8 +31,10 @@ export class CatalogueComponent implements OnInit {
   ngOnInit() {
   	
   }
-  buy(a,b)
-  {	console.log(a);
-  	console.log(b)
+  buy(elem,a,b)
+  {	this.selectedData=a;
+  	this.selectedData.quantityOd=b;
+  	console.log(this.selectedData)
+  	this.modalService.open(elem,{size:"lg"}).result.then((result) => {})
   }
 }

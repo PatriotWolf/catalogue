@@ -10,9 +10,83 @@
       <select  #selectElem class="form-control" id="sel1" >
         <option *ngFor="let num of card.buyQuantity" [selected]="card.buyQuantity == 1" [value]="num">{{num}}</option>
       </select>
-      <button type="button" class="btn btn-primary" (click)="buy(card,selectElem.value)">Default</button>
+      <button type="button" class="btn btn-primary" (click)="buy(content,card,selectElem.value)">Default</button>
     </div>
 
   </div>
   
 </div>
+
+
+<ng-template #content let-c="close" let-d="dismiss" >
+  <div class="modal-header">
+    <h4 class="modal-title">{{selectedData.name}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  		<div class="row">
+	  		
+	  		<div class="form-inline" >
+	  			<label>Retriver Country:</label>
+	  			<select  #selectCountry class="form-control" id="country" >
+			        <option>Malaysia</option>
+			        <option>Singapore</option>
+			        <option>Brunei</option>
+			    </select>
+			</div>
+	    </div>
+	    <br>
+        <div class="row">
+                        <div class="col-4">
+                            <img src="{{selectedData.image_link}}" class="img-responsive" alt="a" style="width:100%">
+                        </div>
+                        <div class="col-8">
+          
+                          
+                        <ngb-tabset>
+						  <ngb-tab>
+						  <ng-template ngbTabTitle>Description</ng-template>
+						    <ng-template ngbTabContent>
+						      <p>{{selectedData.description}}</p>
+						      
+						      <div *ngIf="selectedData.product_colors.length>0">
+						      Colour:
+						      	<div *ngFor="let colour of selectedData.product_colors">
+						      		<div class="color-box" [ngStyle]="{background:colour.hex_value}">{{colour.colour_name}} </div>
+						      	</div>
+						      </div>
+						    </ng-template>
+						  </ngb-tab>
+						  <ngb-tab>
+						    <ng-template ngbTabTitle>Order</ng-template>
+						    <ng-template ngbTabContent>
+						    	<table class="table">
+								  <thead>
+								    <tr>
+								      <th scope="col">Unit Price</th>
+								      <th scope="col">Quantity</th>
+								      <th scope="col">Total</th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								    <tr>
+								      <td><s>MYR{{selectedData.ori| number : '1.2-2'}}</s><br>MYR{{selectedData.price| number : '1.2-2'}}</td>
+								      <td>{{selectedData.quantityOd}}</td>
+								      <td>MYR{{selectedData.price*selectedData.quantityOd| number : '1.2-2'}}</td>
+								    </tr>
+								  </tbody>
+								</table>
+								
+						    </ng-template>
+						  </ngb-tab>
+						</ngb-tabset>
+          				</div>
+        </div>
+   </div>
+  <div class="modal-footer">
+  	<button type="button" class="btn btn-outline-dark" (click)="c('Scan')">Buy</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
