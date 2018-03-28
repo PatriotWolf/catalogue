@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,NgZone} from '@angular/core';
 //import {GetlistService} from '../services/getlist.service';
 import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 	images: Array<string>;;
 	cards:any;
 	isValid:any =true;
-  constructor(private http:HttpClient) { this.getData().subscribe(data => {
+  constructor(private http:HttpClient,private zone:NgZone,private router: Router) { this.getData().subscribe(data => {
             this.cards=data
             this.isValid=false;
             console.log(this.cards)
@@ -25,5 +25,9 @@ export class HomeComponent implements OnInit {
   getData(){
   	return this.http.get("assets/products.json")
 
+  }
+  move(){
+  	localStorage.setItem('product',JSON.stringify(this.cards));
+	  	this.zone.run(() => this.router.navigate(['/catalogue']));
   }
 }
