@@ -10,7 +10,7 @@
       <select  #selectElem class="form-control" id="sel1" >
         <option *ngFor="let num of card.buyQuantity" [selected]="card.buyQuantity == 1" [value]="num">{{num}}</option>
       </select>
-      <button type="button" class="btn btn-primary" (click)="buy(content,card,selectElem.value,'Malaysia')">Default</button>
+      <button type="button" class="btn btn-primary" (click)="buy(content,card,selectElem.value,'Malaysia')">BUY ME!</button>
     </div>
 
   </div>
