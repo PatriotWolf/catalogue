@@ -32,7 +32,6 @@ export class CatalogueComponent implements OnInit {
   		this.cards[2].price="152.30";
 
   	});
-  	console.log(this.cards)
   }
 
   ngOnInit() {
@@ -41,7 +40,6 @@ export class CatalogueComponent implements OnInit {
   buy(elem,a,b,elecountry)
   {	this.selectedData=a;
   	this.selectedData.quantityOd=b;
-  	console.log(this.selectedData)
   	this.country=elecountry;
   	this.shipping=10;
   	this.cost=this.selectedData.price*b;
@@ -63,9 +61,9 @@ export class CatalogueComponent implements OnInit {
   		if(this.cost<=300)
   		{	this.shipping=25}
   	}
-    console.log(event.target.value);
+
     if(event.target.value=="OFF5PC")
-    {	console.log(this.selectedData)
+    {	
     	if(this.selectedData.quantityOd>=2)
     	{	this.cost=this.cost-(this.cost*0.05)
     		this.discount=(this.cost*0.05)
@@ -91,6 +89,6 @@ export class CatalogueComponent implements OnInit {
     	this.discount=0
     }
     this.total=this.cost+this.shipping
-    console.log(b);
+    
   }
 }
