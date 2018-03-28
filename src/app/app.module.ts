@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
+import {FilterPipe} from './catalogue/catalogue.component';
 import {GetlistService} from './services/getlist.service';
 
 @NgModule({
@@ -18,7 +19,8 @@ import {GetlistService} from './services/getlist.service';
     HomeComponent,
     NavComponent,
     FooterComponent,
-    CatalogueComponent
+    CatalogueComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

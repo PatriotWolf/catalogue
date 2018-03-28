@@ -1,10 +1,18 @@
+<br>
 <div class="card-columns" *ngIf="isValid">
-  <div class="card" *ngFor="let card of cards">
+  <div class="card" *ngFor="let card of (cards |filter :data)">
     <img class="card-img-top" src="{{card.image_link}}" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">{{card.name}}</h5>
-      <p class="card-text">{{card.description}}</p>
+      <h4 class="card-title">{{card.brand}}</h4>
+      <h5 >{{card.name}}</h5>
+      <p class="card-text">MYR{{card.price| number : '1.2-2'}}</p>
+      <s>MYR {{card.ori | number : '1.2-2'}}</s>
+      <select  #selectElem class="form-control" id="sel1" >
+        <option *ngFor="let num of card.buyQuantity" [selected]="card.buyQuantity == 1" [value]="num">{{num}}</option>
+      </select>
+      <button type="button" class="btn btn-primary" (click)="buy(card,selectElem.value)">Default</button>
     </div>
+
   </div>
   
 </div>
