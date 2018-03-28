@@ -51,20 +51,7 @@ export class CatalogueComponent implements OnInit {
   	this.total=this.cost+this.shipping
   	this.modalService.open(elem,{size:"lg"}).result.then((result) => {
   		if(result==="Buy")
-	    {	const url = request URL // e.g localhost:3000 + "/download?access_token=" + "sample access token";
-			this.http.get(url, {
-			  responseType: ResponseContentType.Blob
-			}).subscribe(
-			  (response) => { // download file
-			    var blob = new Blob([response.blob()], {type: 'application/pdf'});
-			    const blobUrl = URL.createObjectURL(blob);
-			      const iframe = document.createElement('iframe');
-			      iframe.style.display = 'none';
-			      iframe.src = blobUrl;
-			      document.body.appendChild(iframe);
-			      iframe.contentWindow.print();
-			});
-		}
+	    {}
 	})
   }
   onKey(event: any,b) { // without type info
