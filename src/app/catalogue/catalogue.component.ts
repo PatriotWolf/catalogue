@@ -23,6 +23,7 @@ export class CatalogueComponent implements OnInit {
 	country:any;
 	cost:any;
 	total:any;
+	discount:any=0;
   constructor(private listData:GetlistService,private modalService: NgbModal) {
   	this.listData.getData().subscribe(data =>{
   		console.log(data)
@@ -48,7 +49,23 @@ export class CatalogueComponent implements OnInit {
   	{	this.shipping=0;
   	}
   	this.total=this.cost+this.shipping
-  	this.modalService.open(elem,{size:"lg"}).result.then((result) => {})
+  	this.modalService.open(elem,{size:"lg"}).result.then((result) => {
+  		if(result==="Buy")
+	    {	const url = request URL // e.g localhost:3000 + "/download?access_token=" + "sample access token";
+			this.http.get(url, {
+			  responseType: ResponseContentType.Blob
+			}).subscribe(
+			  (response) => { // download file
+			    var blob = new Blob([response.blob()], {type: 'application/pdf'});
+			    const blobUrl = URL.createObjectURL(blob);
+			      const iframe = document.createElement('iframe');
+			      iframe.style.display = 'none';
+			      iframe.src = blobUrl;
+			      document.body.appendChild(iframe);
+			      iframe.contentWindow.print();
+			});
+		}
+	})
   }
   onKey(event: any,b) { // without type info
   	if(b=="Singapore"){
@@ -64,22 +81,27 @@ export class CatalogueComponent implements OnInit {
     {	console.log(this.selectedData)
     	if(this.selectedData.quantityOd>=2)
     	{	this.cost=this.cost-(this.cost*0.05)
+    		this.discount=(this.cost*0.05)
     	}
     	else{
     		this.cost=this.selectedData.price*this.selectedData.quantityOd;
+    		this.discount=0;
     	}
     }
     else if(event.target.value=="GIVEME15")
     {	console.log(this.cost)
     	if(this.cost>=100)
     	{	this.cost=this.cost-15;
+    		this.discount=15;
     	}
     	else{
     		this.cost=this.selectedData.price*this.selectedData.quantityOd;
+    		this.discount=0;
     	}
     }
     else{
     	this.cost=this.selectedData.price*this.selectedData.quantityOd;
+    	this.discount=0
     }
     this.total=this.cost+this.shipping
     console.log(b);

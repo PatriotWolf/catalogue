@@ -85,7 +85,8 @@
 								<label for="name">Promo code:</label>
 								<input id="name" (keyup)="onKey($event,selectCountry.value)"><br>
 								Shipping Fee: MYR{{shipping| number : '1.2-2'}}<br>
-								Total:MYR{{total| number : '1.2-2'}}
+								Discount: -MYR{{discount| number : '1.2-2'}}<br>
+								Total: MYR{{total| number : '1.2-2'}}
 						    </ng-template>
 						  </ngb-tab>
 						</ngb-tabset>
