@@ -10,7 +10,7 @@
       <select  #selectElem class="form-control" id="sel1" >
         <option *ngFor="let num of card.buyQuantity" [selected]="card.buyQuantity == 1" [value]="num">{{num}}</option>
       </select>
-      <button type="button" class="btn btn-primary" (click)="buy(content,card,selectElem.value)">Default</button>
+      <button type="button" class="btn btn-primary" (click)="buy(content,card,selectElem.value,'Malaysia')">Default</button>
     </div>
 
   </div>
@@ -20,7 +20,8 @@
 
 <ng-template #content let-c="close" let-d="dismiss" >
   <div class="modal-header">
-    <h4 class="modal-title">{{selectedData.name}}</h4>
+    <h4 class="modal-title"><b>{{selectedData.brand}}</b>-
+    {{selectedData.name}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -30,7 +31,7 @@
 	  		
 	  		<div class="form-inline" >
 	  			<label>Retriver Country:</label>
-	  			<select  #selectCountry class="form-control" id="country" >
+	  			<select  #selectCountry class="form-control" id="country" (change)="onKey($event,selectCountry.value)">
 			        <option>Malaysia</option>
 			        <option>Singapore</option>
 			        <option>Brunei</option>
@@ -74,11 +75,17 @@
 								    <tr>
 								      <td><s>MYR{{selectedData.ori| number : '1.2-2'}}</s><br>MYR{{selectedData.price| number : '1.2-2'}}</td>
 								      <td>{{selectedData.quantityOd}}</td>
-								      <td>MYR{{selectedData.price*selectedData.quantityOd| number : '1.2-2'}}</td>
+								      <td>MYR{{cost| number : '1.2-2'}}</td>
 								    </tr>
 								  </tbody>
 								</table>
-								
+								<div class="row">
+									
+								</div>
+								<label for="name">Promo code:</label>
+								<input id="name" (keyup)="onKey($event,selectCountry.value)"><br>
+								Shipping Fee: MYR{{shipping| number : '1.2-2'}}<br>
+								Total:MYR{{total| number : '1.2-2'}}
 						    </ng-template>
 						  </ngb-tab>
 						</ngb-tabset>
@@ -86,7 +93,7 @@
         </div>
    </div>
   <div class="modal-footer">
-  	<button type="button" class="btn btn-outline-dark" (click)="c('Scan')">Buy</button>
+  	<button type="button" class="btn btn-outline-dark" (click)="c('Buy')">Buy</button>
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>

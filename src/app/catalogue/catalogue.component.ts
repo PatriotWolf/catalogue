@@ -19,11 +19,17 @@ export class CatalogueComponent implements OnInit {
 	cards:any=[];
 	isValid=false;
 	selectedData:any;
+	shipping:any;
+	country:any;
+	cost:any;
+	total:any;
   constructor(private listData:GetlistService,private modalService: NgbModal) {
   	this.listData.getData().subscribe(data =>{
   		console.log(data)
   		this.isValid=true;
   		this.cards=data;
+  		this.cards[2].price="152.30";
+
   	});
   	console.log(this.cards)
   }
@@ -31,10 +37,51 @@ export class CatalogueComponent implements OnInit {
   ngOnInit() {
   	
   }
-  buy(elem,a,b)
+  buy(elem,a,b,elecountry)
   {	this.selectedData=a;
   	this.selectedData.quantityOd=b;
   	console.log(this.selectedData)
+  	this.country=elecountry;
+  	this.shipping=10;
+  	this.cost=this.selectedData.price*b;
+  	if(b>2||this.selectedData.price>150)
+  	{	this.shipping=0;
+  	}
+  	this.total=this.cost+this.shipping
   	this.modalService.open(elem,{size:"lg"}).result.then((result) => {})
+  }
+  onKey(event: any,b) { // without type info
+  	if(b=="Singapore"){
+  		if(this.cost<=300)
+  		{	this.shipping=20}
+  	}
+  	if(b=="Brunei"){
+  		if(this.cost<=300)
+  		{	this.shipping=25}
+  	}
+    console.log(event.target.value);
+    if(event.target.value=="OFF5PC")
+    {	console.log(this.selectedData)
+    	if(this.selectedData.quantityOd>=2)
+    	{	this.cost=this.cost-(this.cost*0.05)
+    	}
+    	else{
+    		this.cost=this.selectedData.price*this.selectedData.quantityOd;
+    	}
+    }
+    else if(event.target.value=="GIVEME15")
+    {	console.log(this.cost)
+    	if(this.cost>=100)
+    	{	this.cost=this.cost-15;
+    	}
+    	else{
+    		this.cost=this.selectedData.price*this.selectedData.quantityOd;
+    	}
+    }
+    else{
+    	this.cost=this.selectedData.price*this.selectedData.quantityOd;
+    }
+    this.total=this.cost+this.shipping
+    console.log(b);
   }
 }
