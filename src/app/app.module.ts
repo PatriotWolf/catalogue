@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
-
+import {GetlistService} from './services/getlist.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { CatalogueComponent } from './catalogue/catalogue.component';
     HttpClientModule,
     AppRoutingModule,NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [GetlistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

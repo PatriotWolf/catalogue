@@ -7,6 +7,6 @@ export class GetlistService {
   	constructor(private http:Http) { }
   	getData() {
 
-  		return this.http.get("https://makeup-api.herokuapp.com/api/v1/products.json").map(res => res.json());
+  		return this.http.get("assets/products.json").map(res => res.json());
 	}
 }
